@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePass - Password Strength Checker & Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>SecurePass</h1>
+                    <p>Check your password strength and generate secure passwords</p>
+                </div>
+                <div class="header-right">
+                    <button id="darkModeToggle" class="btn btn-small btn-outline" title="Toggle dark mode">
+                        <span id="darkModeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Password Checker Section -->
+            <section class="password-checker">
+                <h2>Password Strength Checker</h2>
+                <div class="input-group">
+                    <div class="password-input-container">
+                        <input type="password" id="passwordInput" placeholder="Enter your password to check" autocomplete="off">
+                        <button type="button" id="togglePassword" class="eye-button" title="Show/Hide password">
+                            <span class="eye-icon">👁️</span>
+                        </button>
+                    </div>
+                    <button id="checkBtn" class="btn btn-primary">Check Strength</button>
+                </div>
+                
+                <div id="strengthResult" class="result hidden">
+                    <!-- Strength Cards -->
+                    <div class="strength-cards">
+                        <div class="strength-card weak-card" id="weakCard">
+                            <div class="card-icon">⚠️</div>
+                            <div class="card-title">Weak</div>
+                            <div class="card-description">Password needs improvement</div>
+                        </div>
+                        <div class="strength-card medium-card" id="mediumCard">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-title">Medium</div>
+                            <div class="card-description">Good but could be stronger</div>
+                        </div>
+                        <div class="strength-card strong-card" id="strongCard">
+                            <div class="card-icon">🛡️</div>
+                            <div class="card-title">Strong</div>
+                            <div class="card-description">Excellent security</div>
+                        </div>
+                    </div>
+                    
+                    <div class="strength-indicator">
+                        <div class="strength-bar">
+                            <div id="strengthBar" class="strength-fill"></div>
+                        </div>
+                        <div class="strength-info">
+                            <span id="strengthText" class="strength-text"></span>
+                            <span id="strengthPercentage" class="strength-percentage"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="strengthDetails" class="strength-details"></div>
+                    
+                    <div id="breachResult" class="breach-result"></div>
+                </div>
+            </section>
+
+            <!-- Password Generator Section -->
+            <section class="password-generator">
+                <h2>Password Generator</h2>
+                <div class="generator-controls">
+                    <div class="control-group">
+                        <label for="passwordLength">Length:</label>
+                        <input type="range" id="passwordLength" min="8" max="32" value="16">
+                        <span id="lengthValue">16</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="includeSymbols" checked>
+                            Include symbols
+                        </label>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="includeNumbers" checked>
+                            Include numbers
+                        </label>
+                    </div>
+                    
+                    <button id="generateBtn" class="btn btn-secondary">Generate Password</button>
+                </div>
+                
+                <div id="generatedPassword" class="generated-password hidden">
+                    <div class="password-display">
+                        <input type="text" id="generatedPasswordInput" readonly>
+                        <button id="copyBtn" class="btn btn-small">Copy</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Password History Section -->
+            <section class="password-history">
+                <h2>Recent Checks</h2>
+                <div id="passwordHistory" class="history-list">
+                    <p class="no-history">No passwords checked yet</p>
+                </div>
+                <button id="clearHistory" class="btn btn-small btn-outline">Clear History</button>
+            </section>
+
+            <!-- Password Suggestions Section -->
+            <section class="password-suggestions">
+                <h2>Password Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">🔒</div>
+                        <h3>Length Matters</h3>
+                        <p>Use at least 12 characters for better security</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🎲</div>
+                        <h3>Random is Better</h3>
+                        <p>Avoid common words and personal information</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🔄</div>
+                        <h3>Unique Passwords</h3>
+                        <p>Use different passwords for each account</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📱</div>
+                        <h3>Password Manager</h3>
+                        <p>Consider using a password manager for convenience</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built with security in mind. Your passwords are never stored.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
